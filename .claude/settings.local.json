@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "// Windows通知用PowerShellコマンドのみ許可",
       "Bash(powershell -c \"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show*)"
     ],
     "deny": [

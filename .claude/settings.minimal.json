@@ -1,0 +1,64 @@
+{
+  "permissions": {
+    "allow": [
+      "// Windows通知用PowerShellコマンドのみ許可",
+      "Bash(powershell -c \"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show*)"
+    ],
+    "deny": [
+      "// 危険なシステム操作",
+      "Bash(sudo:*)",
+      "Bash(rm -rf:*)",
+      "Bash(chmod:*)",
+      "Bash(chown:*)",
+      "Bash(systemctl:*)",
+      "Bash(service:*)",
+      "Bash(killall:*)",
+      "Bash(pkill:*)",
+      
+      "// Git操作（コミット・プッシュ等）",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git reset:*)",
+      "Bash(git rebase:*)",
+      
+      "// 機密情報へのアクセス",
+      "Read(.env.*)",
+      "Read(id_rsa)",
+      "Read(id_ed25519)",
+      "Read(**/*token*)",
+      "Read(**/*key*)",
+      "Read(**/*password*)",
+      "Read(**/*secret*)",
+      "Read(**/.ssh/**)",
+      "Write(.env*)",
+      "Write(**/secrets/**)",
+      
+      "// 危険なコマンド実行",
+      "Bash(eval:*)",
+      "Bash(exec:*)",
+      "Bash(sh -c:*)",
+      "Bash(bash -c:*)",
+      "Bash(python -c:*)",
+      "Bash(node -e:*)",
+      "Bash(ruby -e:*)",
+      
+      "// ディスク・ファイルシステム操作",
+      "Bash(dd:*)",
+      "Bash(fdisk:*)",
+      "Bash(mount:*)",
+      "Bash(umount:*)",
+      
+      "// システムファイル書き込み",
+      "Write(/etc/**)",
+      "Write(/var/**)",
+      "Write(/usr/**)",
+      "Write(/opt/**)",
+      "Write(/System/**)",
+      "Write(/Windows/**)",
+      "Write(/Program Files/**)",
+      "Write(C:\\Windows\\**)",
+      "Write(C:\\Program Files\\**)",
+      "Write(C:\\ProgramData\\**)"
+    ]
+  }
+}

@@ -10,22 +10,27 @@ Claude Codeの動作を制御し、セキュリティを確保するための設
 
 ```
 .claude/
-├── settings.local.json  # セキュリティ設定・権限制御
-└── CLAUDE.md           # 個人設定・コードスタイル
+├── settings.local.json   # セキュリティ設定・権限制御（全般）
+├── settings.minimal.json # 最小限のセキュリティ設定
+└── CLAUDE.md            # 個人設定・コードスタイル
 ```
 
 ## セキュリティ設定
 
 ### settings.local.json
-危険なコマンドや操作を制限する設定ファイルです。
+危険なコマンドや操作を制限する設定ファイルです（包括的な制限）。
+
+### settings.minimal.json
+本当に危険なコマンドのみを制限する最小限の設定ファイルです。
 
 **制限されるコマンド例:**
 - システム管理コマンド: `sudo`, `chmod`, `systemctl`
-- ファイル削除: `rm`, `rm -rf`
+- ファイル削除: `rm -rf`
 - Git操作: `git push`, `git commit`, `git reset`
-- ネットワーク通信: `curl`, `wget`, `nc`
-- データベース操作: `psql`, `mysql`, `mongod`
 - 機密情報へのアクセス: `.env`, SSH鍵, トークンファイル
+- 危険なコマンド実行: `eval`, `exec`, `sh -c`
+- ディスク・ファイルシステム操作: `dd`, `fdisk`, `mount`
+- システムファイル書き込み: `/etc`, `/Windows`, `/Program Files`
 
 **許可されるコマンド例:**
 - Windows通知用PowerShellコマンド（タスク完了通知）

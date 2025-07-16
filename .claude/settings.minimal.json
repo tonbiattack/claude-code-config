@@ -60,5 +60,20 @@
       "Write(C:\\Program Files\\**)",
       "Write(C:\\ProgramData\\**)"
     ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "type": "command",
+        "command": "powershell -c \"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Claude Codeが応答を待っています', 'Claude Code')\""
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "type": "command",
+        "command": "echo \"$(date): $(echo '$TOOL_INPUT' | jq -r '.command')\" >> ~/claude-commands.log"
+      }
+    ]
   }
 }

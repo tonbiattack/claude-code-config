@@ -14,13 +14,11 @@
       "Bash(service:*)",
       "Bash(killall:*)",
       "Bash(pkill:*)",
-      
       "// Git操作（コミット・プッシュ等）",
       "Bash(git push:*)",
       "Bash(git commit:*)",
       "Bash(git reset:*)",
       "Bash(git rebase:*)",
-      
       "// 機密情報へのアクセス",
       "Read(.env.*)",
       "Read(id_rsa)",
@@ -32,7 +30,6 @@
       "Read(**/.ssh/**)",
       "Write(.env*)",
       "Write(**/secrets/**)",
-      
       "// 危険なコマンド実行",
       "Bash(eval:*)",
       "Bash(exec:*)",
@@ -41,13 +38,11 @@
       "Bash(python -c:*)",
       "Bash(node -e:*)",
       "Bash(ruby -e:*)",
-      
       "// ディスク・ファイルシステム操作",
       "Bash(dd:*)",
       "Bash(fdisk:*)",
       "Bash(mount:*)",
       "Bash(umount:*)",
-      
       "// システムファイル書き込み",
       "Write(/etc/**)",
       "Write(/var/**)",
@@ -62,17 +57,26 @@
     ]
   },
   "hooks": {
-    "Notification": [
-      {
-        "type": "command",
-        "command": "powershell -c \"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Claude Codeが応答を待っています', 'Claude Code')\""
-      }
-    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
-        "type": "command",
-        "command": "powershell -c \"Add-Content -Path '$env:USERPROFILE\\claude-commands.log' -Value \\\"$(Get-Date): $($env:TOOL_INPUT | ConvertFrom-Json | Select-Object -ExpandProperty command)\\\"\""
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -c \\\"Add-Content -Path '$env:USERPROFILE\\\\claude-commands.log' -Value \\\\\\\"$(Get-Date): $($env:TOOL_INPUT | ConvertFrom-Json | Select-Object -ExpandProperty command)\\\\\\\"\\\""
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -c \\\"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Claude Codeが応答を待っています', 'Claude Code')\\\""
+          }
+        ]
       }
     ]
   }

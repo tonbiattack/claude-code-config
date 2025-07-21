@@ -20,31 +20,39 @@
 - ユーザーの確認が必要な場合も通知を表示する
 
 ### 通知方法
-#### Windows通知（最も簡単）
-msgコマンドを使用したシンプルな通知：
+#### Linux/Mac通知
+echoコマンドを使用したシンプルな通知：
 
 **タスク完了時：**
 ```bash
-msg * "Claude Code - タスク完了！ 実施内容：[具体的な作業内容] 動作確認方法：[確認手順]"
+echo "Claude Code - タスク完了！ 実施内容：[具体的な作業内容] 動作確認方法：[確認手順]"
 ```
 
 **ユーザー確認が必要な時：**
 ```bash
-msg * "Claude Code - 確認要求 確認内容：[確認が必要な内容] 次の手順：[必要な対応]"
+echo "Claude Code - 確認要求 確認内容：[確認が必要な内容] 次の手順：[必要な対応]"
 ```
 
 #### より高機能な通知（オプション）
-PowerShellのトースト通知を使用：
+デスクトップ環境向けの通知を使用：
+
+**Linux（notify-send利用）:**
 ```bash
-powershell -c "New-BurntToastNotification -Text 'Claude Code', 'タスクが完了しました！'"
+notify-send "Claude Code" "タスクが完了しました！"
+```
+
+**macOS（osascript利用）:**
+```bash
+osascript -e 'display notification "タスクが完了しました！" with title "Claude Code"'
 ```
 
 #### 設定要件
 settings.local.jsonでの許可設定が必要：
 ```json
 "allow": [
-  "// Windows通知用コマンドのみ許可",
-  "Bash(msg *)",
-  "Bash(powershell -c \"New-BurntToastNotification*)"
+  "// 通知用コマンドのみ許可",
+  "Bash(echo *)",
+  "Bash(notify-send *)",
+  "Bash(osascript *)"
 ]
 ```

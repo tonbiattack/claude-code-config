@@ -1,9 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "// Windows通知用コマンドのみ許可",
-      "Bash(msg *)",
-      "Bash(powershell -c \"New-BurntToastNotification*)"
+      "// 通知用コマンドのみ許可",
+      "Bash(echo *)",
+      "Bash(notify-send *)",
+      "Bash(osascript *)"
     ],
     "deny": [
       "// 危険なシステム操作",
@@ -75,7 +76,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "msg * \\\"Claude Code - 応答を待っています\\\""
+            "command": "echo \"Claude Code - 応答を待っています\""
           }
         ]
       }

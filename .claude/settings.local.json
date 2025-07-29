@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(windows-notify:*)",
+      "Bash(where msg)"
+    ],
+    "deny": []
+  }
+}

@@ -4,7 +4,9 @@
       "// 通知用コマンドのみ許可",
       "Bash(echo *)",
       "Bash(notify-send *)",
-      "Bash(osascript *)"
+      "Bash(osascript *)",
+      "Bash(msg *)",
+      "Bash(powershell *)"
     ],
     "deny": [
       "// 危険なシステム操作",
